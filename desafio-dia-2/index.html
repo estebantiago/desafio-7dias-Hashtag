@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio Hashtag</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        #container {
+            border-radius: 5px;
+            box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.603);
+            max-height: 50%;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+        }
+        input[type='text'] {
+            padding: 10px;
+        }
+        input[type='button']{
+            padding: 5px;
+            width: 100px;
+            border-radius: 10px;  
+        } 
+        input[type='number'] {
+            padding: 10px;
+            
+        }
+        input#txtling {
+            width: 300px;
+        }
+        #res {
+            font-weight: bolder;
+        }
+        
+    </style>
+
+</head>
+<body>
+    <head>
+    <h1>
+        Desafio hashtag dia 2 
+    </h1>
+    </head>
+    <div id="container">
+        <label for="txtname">Digite seu nome: <input type="text" id="txtname"></label>
+        <p><label for="txtid"> Qual sua idade:<input type="number" id="txtid"></label></p>
+        <p><label for="txtling">Qual linguagem de programação esta estudando ?</label></p>
+        <p><input type="text" id="txtling"></p>
+
+        <p><input type="button" value="Enviar" onclick="enviar()"></p>
+        <div id="res">
+
+        </div>
+    </div>
+    <script src="script.js"> </script>
+    
+</body>
+</html>
