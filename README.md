@@ -54,3 +54,5 @@ Por isso, hoje, eu vou te ensinar a desenvolver um programa simulando um desses 
 No final, o sistema vai exibir a mensagem:
 
 "Olá [nome], você tem [idade] anos e já está aprendendo [linguagem]!"
+
+## DIA 3 --------------------------------------------------------------------------------
