@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jogo de Escolhas — Carreira Dev</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #121831;
+      --muted: #9aa3b2;
+      --text: #e7ebf3;
+      --accent: #6ee7ff;
+      --accent-2: #8b5cf6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 20% -10%, #1b2350 0%, transparent 60%),
+                  radial-gradient(1000px 500px at 120% 10%, #2b0d52 0%, transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
+      display: grid; place-items: center; padding: 24px;
+    }
+    .app {
+      width: 100%; max-width: 880px; background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(6px);
+      border-radius: 20px; padding: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+    }
+    h1 { margin: 0 0 4px; font-size: clamp(20px, 3vw, 34px); }
+    p.subtitle { margin: 0 0 20px; color: var(--muted); }
+
+    .grid { display: grid; gap: 16px; }
+    .section { background: var(--card); border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,0.06); }
+    .section h2 { margin: 0 0 8px; font-size: clamp(16px, 2.2vw, 22px); }
+    .row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .tag {
+      padding: 10px 14px; border-radius: 12px; cursor: pointer; user-select: none;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+    }
+    .tag:hover { transform: translateY(-1px); }
+    input[type="radio"], input[type="checkbox"] { display: none; }
+    label.option { display: inline-flex; align-items: center; gap: 10px; }
+    label.option span {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 10px 14px; border-radius: 12px; cursor: pointer; background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    input:checked + span { outline: 2px solid transparent; border-color: var(--accent); background: rgba(110,231,255,0.12); box-shadow: inset 0 0 0 1px rgba(110,231,255,.3); }
+
+    .actions { display: flex; gap: 12px; justify-content: flex-end; }
+    button {
+      appearance: none; border: none; cursor: pointer; padding: 12px 18px; border-radius: 12px;
+      font-weight: 600; letter-spacing: .2px; color: #0a0d1a; background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      transition: transform .06s ease, filter .2s ease; box-shadow: 0 8px 18px rgba(139,92,246,.25);
+    }
+    button:hover { filter: brightness(1.08); }
+    button:active { transform: translateY(1px); }
+
+    .output { background: #0c132b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; min-height: 120px; white-space: pre-wrap; }
+    .muted { color: var(--muted); }
+    .divider { height: 1px; background: rgba(255,255,255,0.08); margin: 8px 0 0; }
+    .small { font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <main class="app grid">
+    <header>
+      <h1>Jogo de Escolhas — Carreira Dev</h1>
+      <p class="subtitle">Use estrutura de controle (<strong>if/else</strong>, <strong>for</strong>, <strong>while</strong>) e mude o destino do seu personagem dev ✨</p>
+    </header>
+
+    <section class="section grid" aria-labelledby="etapa1">
+      <h2 id="etapa1">1) Escolha a área</h2>
+      <div class="row" role="group" aria-label="Área">
+        <label class="option">
+          <input type="radio" name="area" value="front" />
+          <span>Front-End</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="area" value="back" />
+          <span>Back-End</span>
+        </label>
+      </div>
+    </section>
+
+    <section class="section grid" aria-labelledby="etapa2">
+      <h2 id="etapa2">2) Stack inicial</h2>
+      <div id="stackFront" class="row" hidden>
+        <label class="option">
+          <input type="radio" name="stack" value="react" />
+          <span>React</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="stack" value="vue" />
+          <span>Vue</span>
+        </label>
+      </div>
+      <div id="stackBack" class="row" hidden>
+        <label class="option">
+          <input type="radio" name="stack" value="csharp" />
+          <span>C#</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="stack" value="java" />
+          <span>Java</span>
+        </label>
+      </div>
+      <p class="muted small">Dica: a seção muda automaticamente conforme a área escolhida.</p>
+    </section>
+
+    <section class="section grid" aria-labelledby="etapa3">
+      <h2 id="etapa3">3) Especializar ou Fullstack?</h2>
+      <div class="row" role="group" aria-label="Trilha">
+        <label class="option">
+          <input type="radio" name="trilha" value="especializar" />
+          <span>Seguir se especializando</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="trilha" value="fullstack" />
+          <span>Virar Fullstack</span>
+        </label>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button id="btnJogar" type="button">Começar a jornada ▶</button>
+      <button id="btnReset" type="button" title="Limpar escolhas">Reiniciar</button>
+    </div>
+
+    <section class="section grid" aria-labelledby="saida">
+      <h2 id="saida">Resultados</h2>
+      <div id="output" class="output" aria-live="polite"></div>
+      <div class="divider"></div>
+      <p class="muted small">Observação: no passo final, um <em>loop</em> com <code>while</code> pergunta novas tecnologias usando <code>prompt</code> e <code>confirm</code>. Em seguida, um <code>for</code> lista as tecnologias.</p>
+    </section>
+  </main>
+
+  <script>
+    // Utilitários
+    const $$ = (sel, parent=document) => Array.from(parent.querySelectorAll(sel));
+    const $ = (sel, parent=document) => parent.querySelector(sel);
+
+    const areaRadios = $$('input[name="area"]');
+    const stackRadios = $$('input[name="stack"]');
+    const trilhaRadios = $$('input[name="trilha"]');
+    const stackFront = $('#stackFront');
+    const stackBack = $('#stackBack');
+    const out = $('#output');
+
+    // 1) Reage à escolha de área para mudar a seção 2
+    areaRadios.forEach(r => r.addEventListener('change', () => {
+      const area = $('input[name="area"]:checked')?.value;
+      if (area === 'front') {
+        stackFront.hidden = false; stackBack.hidden = true;
+      } else if (area === 'back') {
+        stackBack.hidden = false; stackFront.hidden = true;
+      } else {
+        stackFront.hidden = true; stackBack.hidden = true;
+      }
+      // limpa seleção de stack ao trocar de área
+      $$('input[name="stack"]').forEach(s => s.checked = false);
+    }));
+
+    // 2) Mensagens helper
+    function mensagemArea(area, stack) {
+      if (area === 'front') {
+        if (stack === 'react') return 'Você escolheu Front-End com React. Excelente para interfaces dinâmicas e SPA.';
+        if (stack === 'vue')   return 'Você escolheu Front-End com Vue. Ótimo equilíbrio entre simplicidade e poder.';
+        return 'Escolha uma stack de Front-End (React ou Vue).';
+      } else if (area === 'back') {
+        if (stack === 'csharp') return 'Você escolheu Back-End com C#. Forte no ecossistema .NET e grandes empresas.';
+        if (stack === 'java')   return 'Você escolheu Back-End com Java. Muito usado em sistemas robustos e escaláveis.';
+        return 'Escolha uma stack de Back-End (C# ou Java).';
+      }
+      return 'Primeiro selecione a área (Front-End ou Back-End).';
+    }
+
+    function mensagemTrilha(trilha, area) {
+      // if/else cria a ramificação da história
+      if (trilha === 'especializar') {
+        return `Você decidiu se aprofundar em ${area === 'front' ? 'Front-End' : 'Back-End'}. Foque em fundamentos, boas práticas e testes.`;
+      } else if (trilha === 'fullstack') {
+        return `Você decidiu virar Fullstack! Prepare-se para integrar ${area === 'front' ? 'Front-End com APIs e banco' : 'Back-End com HTML/CSS/JS'}.`;
+      }
+      return 'Escolha se você quer se especializar ou virar Fullstack.';
+    }
+
+    // 3) Lógica principal acionada pelo botão
+    $('#btnJogar').addEventListener('click', () => {
+      const area = $('input[name="area"]:checked')?.value;
+      const stack = $('input[name="stack"]:checked')?.value;
+      const trilha = $('input[name="trilha"]:checked')?.value;
+
+      // Validações com if/else
+      if (!area) {
+        alert('Escolha a área (Front-End ou Back-End).');
+        return;
+      }
+      if (!stack) {
+        alert('Escolha a stack da etapa 2.');
+        return;
+      }
+      if (!trilha) {
+        alert('Escolha a trilha (Especializar ou Fullstack).');
+        return;
+      }
+
+      // Mensagens iniciais
+      const msg1 = mensagemArea(area, stack);
+      const msg2 = mensagemTrilha(trilha, area);
+
+      // 4) Loop de tecnologias usando while + prompt/confirm
+      const tecnologias = [];
+      let continuar = true;
+      while (continuar) {
+        const tech = prompt('Qual tecnologia você quer aprender/aprofundar? (Ex.: TypeScript, Docker, SQL)');
+        if (tech && tech.trim()) {
+          tecnologias.push(tech.trim());
+          alert(`Legal! ${tech.trim()} é uma ótima escolha.`);
+        }
+        continuar = confirm('Tem mais alguma tecnologia que você gostaria de aprender? \nClique em OK para adicionar outra, ou Cancelar para encerrar.');
+      }
+
+      // Monta o resultado com for (exibe a lista)
+      let lista = tecnologias.length ? '\n\nTecnologias escolhidas:' : '\n\nNenhuma tecnologia adicionada.';
+      for (let i = 0; i < tecnologias.length; i++) {
+        lista += `\n - ${i + 1}. ${tecnologias[i]}`;
+      }
+
+      // Comentário adicional com switch (opcional, para variar a estrutura de controle)
+      let comentarioFinal = '';
+      switch (trilha) {
+        case 'especializar':
+          comentarioFinal = '\n\nDica: escolha 1–2 tópicos e aprofunde bastante (arquitetura, testes, performance).';
+          break;
+        case 'fullstack':
+          comentarioFinal = '\n\nDica: construa projetos integrando front, back e banco de dados (CRUD completo).';
+          break;
+      }
+
+      out.textContent = `${msg1}\n${msg2}${lista}${comentarioFinal}`;
+    });
+
+    // Reset
+    $('#btnReset').addEventListener('click', () => {
+      $$('input[type="radio"]').forEach(i => i.checked = false);
+      stackFront.hidden = true; stackBack.hidden = true;
+      out.textContent = '';
+    });
+  </script>
+</body>
+</html>
