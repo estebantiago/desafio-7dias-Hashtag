@@ -1,50 +1,38 @@
+let areaEscolhida = ""
+let tecnologiaEscolhida = ""
 
-const enviar = () => {
+function escolherArea(area) {
+  let resEsc = document.querySelector('div#resEsc')
+  areaEscolhida = area
+  resEsc.innerHTML = `Parabéns você escolheu <strong>${area}</strong>!`
 
-  let inpUser = document.querySelector('input#txtstack')
-  let res = document.querySelector('div#res')
 
-  res.innerHTML=''
+  let botoesTec = document.querySelectorAll('#escTec input[type="button"]')
+  botoesTec.forEach(botao => {
+    botao.disabled = true // desabilita todos botão primeiro
 
-  if (inpUser.value.length == 0) {
-    alert('[ERRO] Preencha o campo!')
-    return
-  } 
-  let stackUser = String(inpUser.value)
-  let perguntaSeguinte = ''
-  
-  if (stackUser.toLocaleLowerCase() == 'front end') {
-    res.innerHTML = 'Voce quer aprender React ou Vue ?'
-    let inputEscolha = document.createElement("input")
-    let inpButton = document.createElement("input")
-     
-    inputEscolha.type = 'text'
-    inputEscolha.id = 'inputEscolha'
-    inputEscolha.placeholder='Escolha uma opção'
-
-    inpButton.type = 'button'
-    inpButton.value = 'Enviar'
-    inpButton.id = 'btn-escolha'
-    
-    res.appendChild(inputEscolha)
-    res.appendChild(inpButton)
-
+  })
+  if (area === 'Front End') {
+    botoesTec[0].disabled = false
+    botoesTec[1].disabled = false
+  } else if (area === 'Back End') {
+    botoesTec[2].disabled = false
+    botoesTec[3].disabled = false
+  } else if (area === 'Full Stack') {
+    botoesTec.forEach(botao => botao.disabled = false)
   }
-  if (stackUser.toLocaleLowerCase() == 'back end'){
-    res.innerHTML='Voce quer aprender C# ou aprender Java ? '
-     let inputEscolha = document.createElement("input")
-     
-    inputEscolha.type = 'text'
-    inputEscolha.id = 'inputEscolha'
-    inputEscolha.placeholder='Escolha uma opção'
-    res.appendChild(inputEscolha)
-  }
-  if (stackUser.toLocaleLowerCase() =='full stack'){
-    res.innerHTML='Parabens por escolher uma carreira Full Stack'
-  }
-
 
 }
+
+function escolhaTec(tecnologia) {
+  tecnologiaEscolhida = tecnologia
+  let res = document.getElementById('resTec')
+  
+    res.innerHTML = `Parabéns ! Você escolheu ${tecnologiaEscolhida}!`
+
+  }
+
+
 
 
 
