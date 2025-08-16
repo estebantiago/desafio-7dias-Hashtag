@@ -25,6 +25,7 @@ h1 {
 }
 div#esc  p,
 div#escTec p{
+    
     font-size: 1.5em ;
 }
 
@@ -41,7 +42,11 @@ input:hover {
     transition: 0.3s;
 }
 #resFinal {
-    color: white;
+    min-height: 50px;
+    border-radius: 15px;
+    padding: 10px;
+    background-color: rgb(229, 229, 231);
+    color: rgb(0, 0, 0);
     font: 1.5em;
 }
 

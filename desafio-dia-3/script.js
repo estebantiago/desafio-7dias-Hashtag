@@ -24,11 +24,11 @@ function escolherArea(area) {
 
 }
 
-function escolherTec(tec) {
+function escolhaTec(tec) {
   tecEscolhida = tec
   let res = document.getElementById('resTec')
 
-  res.innerHTML = `Parabéns ! Você escolheu ${tecEscolhida}!`
+  res.innerHTML = `Parabéns! Você escolheu ${tecEscolhida}!`
 
   escTecFinal()
 
@@ -36,15 +36,15 @@ function escolherTec(tec) {
 
 function escTecFinal() {
   let resFinal = document.getElementById('resFinal')
-  resFinal.innerHTML = ''
+  
   let tecAdicionais = []
-
+  
 
   while (true) {
     let querMais = confirm('Tem mais alguma tecnologia que voce gostaria de aprender ?')
 
     if (!querMais) {
-      resFinal.innerHTML = 'Muito bem, ótima escolha'
+      resFinal.innerHTML += 'Muito bem! Ótimas escolhas, continue estudando que você chegará lá.'
       break
 
     }
@@ -57,20 +57,13 @@ function escTecFinal() {
       // Se o usuário não digitou nada ou cancelou o prompt, apenas informamos e saímos do loop
       resFinal.innerHTML += '<p>Nenhuma nova tecnologia foi adicionada. Bons estudos!</p>'
       break;
-    }
-
+    } 
 
   }
-  
    
-   let resumoHTML = `<h2> Resumo da sua jornada </h2>`
-   resumoHTML = `<p> <strong>Área Principal:</strong> ${areaEscolhida}`
-   resumoHTML = `<P> <strong>Stack Escolhida:</strong> ${stackEscolhida}`
-
-
-  
 
 }
+
 
 
 
