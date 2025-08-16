@@ -1,5 +1,5 @@
 let areaEscolhida = ""
-let stackEscolhida = ""
+let tecEscolhida = ""
 
 function escolherArea(area) {
   let resEsc = document.querySelector('div#resEsc')
@@ -24,11 +24,11 @@ function escolherArea(area) {
 
 }
 
-function escolhaStack(stack) {
-  stackEscolhida = stack
+function escolherTec(tec) {
+  tecEscolhida = tec
   let res = document.getElementById('resTec')
 
-  res.innerHTML = `Parabéns ! Você escolheu ${stackEscolhida}!`
+  res.innerHTML = `Parabéns ! Você escolheu ${tecEscolhida}!`
 
   escTecFinal()
 
@@ -37,6 +37,7 @@ function escolhaStack(stack) {
 function escTecFinal() {
   let resFinal = document.getElementById('resFinal')
   resFinal.innerHTML = ''
+  let tecAdicionais = []
 
 
   while (true) {
@@ -47,7 +48,7 @@ function escTecFinal() {
       break
 
     }
-    let tecAdicionais = []
+    
     let novaTec = prompt('Digite qual tecnologia você deseja aprender mais ')
     if (novaTec && novaTec.trim() !== "") {
       tecAdicionais.push(novaTec.trim())
@@ -60,12 +61,16 @@ function escTecFinal() {
 
 
   }
-   resFinal.innerHTML = '';
+  
+   
+   let resumoHTML = `<h2> Resumo da sua jornada </h2>`
+   resumoHTML = `<p> <strong>Área Principal:</strong> ${areaEscolhida}`
+   resumoHTML = `<P> <strong>Stack Escolhida:</strong> ${stackEscolhida}`
+
 
   
+
 }
-
-
 
 
 
