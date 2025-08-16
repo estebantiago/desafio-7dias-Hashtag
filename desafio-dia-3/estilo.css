@@ -40,4 +40,8 @@ input:hover {
     background-color: lightblue;
     transition: 0.3s;
 }
+#resFinal {
+    color: white;
+    font: 1.5em;
+}
 

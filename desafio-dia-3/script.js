@@ -1,5 +1,5 @@
 let areaEscolhida = ""
-let tecnologiaEscolhida = ""
+let stackEscolhida = ""
 
 function escolherArea(area) {
   let resEsc = document.querySelector('div#resEsc')
@@ -24,13 +24,51 @@ function escolherArea(area) {
 
 }
 
-function escolhaTec(tecnologia) {
-  tecnologiaEscolhida = tecnologia
+function escolhaStack(stack) {
+  stackEscolhida = stack
   let res = document.getElementById('resTec')
-  
-    res.innerHTML = `Parabéns ! Você escolheu ${tecnologiaEscolhida}!`
+
+  res.innerHTML = `Parabéns ! Você escolheu ${stackEscolhida}!`
+
+  escTecFinal()
+
+}
+
+function escTecFinal() {
+  let resFinal = document.getElementById('resFinal')
+  resFinal.innerHTML = ''
+
+
+  while (true) {
+    let querMais = confirm('Tem mais alguma tecnologia que voce gostaria de aprender ?')
+
+    if (!querMais) {
+      resFinal.innerHTML = 'Muito bem, ótima escolha'
+      break
+
+    }
+    let tecAdicionais = []
+    let novaTec = prompt('Digite qual tecnologia você deseja aprender mais ')
+    if (novaTec && novaTec.trim() !== "") {
+      tecAdicionais.push(novaTec.trim())
+      resFinal.innerHTML += `<p>Legal! <strong>${novaTec}</strong> é uma ótima tecnologia para explorar.</p>`
+    } else {
+      // Se o usuário não digitou nada ou cancelou o prompt, apenas informamos e saímos do loop
+      resFinal.innerHTML += '<p>Nenhuma nova tecnologia foi adicionada. Bons estudos!</p>'
+      break;
+    }
+
 
   }
+   resFinal.innerHTML = '';
+
+  
+}
+
+
+
+
+
 
 
 
